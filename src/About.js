@@ -5,7 +5,8 @@ import UserContext from './UserContext';
 const About = () => {
   return (
     <UserContext.Consumer>
-      { user => {
+      { value => {
+        const { user } = value;
         return (
           <div className='profile-section '>
             <div className='section-header'>

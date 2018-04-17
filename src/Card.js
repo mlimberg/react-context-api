@@ -23,10 +23,11 @@ class Card extends Component {
 
     return (    
       <UserContext.Consumer>
-        { user => {
+        { value => {
+            console.log('VALUE ', value)
             return (
               <div className='card'>
-                <span className='delete-btn'>X</span>
+                <span className='delete-btn' onClick={() => value.deleteCard(id)}>X</span>
                 <h3>{toggleItem()}</h3>
                 <p>{`Category: ${rating}`}</p>
               </div>  

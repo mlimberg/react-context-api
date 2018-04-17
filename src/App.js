@@ -11,8 +11,16 @@ class App extends Component {
   constructor() {
     super();
 
+    this.deleteCard = id => {
+      const favorites = this.state.user.favorites.filter(fav => fav.id !== id);
+      const newState = Object.assign({}, this.state, { user: { favorites }})
+      this.setState(newState);
+      
+    }
+
     this.state = {
-      user: null
+      user: null,
+      deleteCard: this.deleteCard
     }  
     
     this.signIn = this.signIn.bind(this);
@@ -34,10 +42,10 @@ class App extends Component {
         { id: 1, item: 'Pirates of the Caribbean', rating: 'PG-13' },
         { id: 2, item: 'Hook', rating: 'PG' },
         { id: 3, item: 'The Goonies', rating: 'PG' },
-        { id: 5, item: 'Swashbuckler', rating: 'PG' },
+        { id: 4, item: 'Swashbuckler', rating: 'PG' },
         { id: 5, item: 'Peter Pan', rating: 'G' },
-        { id: 5, item: 'The Princess Bride', rating: 'PG' },
-        { id: 5, item: 'Captain Phillips', rating: 'PG-13' },
+        { id: 6, item: 'The Princess Bride', rating: 'PG' },
+        { id: 7, item: 'Captain Phillips', rating: 'PG-13' },
       ]
     }
 
@@ -54,7 +62,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={this.state}>
           <Header signOut={this.signOut} />
           { user ? <Profile /> : <SignIn signIn={this.signIn} />}
 

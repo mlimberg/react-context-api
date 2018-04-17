@@ -6,7 +6,8 @@ import Card from './Card';
 const Favorites = () => {
   return (
     <UserContext.Consumer>
-      {user => {
+      {value => {
+        const { user } = value;
         const renderFavorites = () => user.favorites.map(fav => <Card {...fav} key={fav.id} />) 
 
         return (
