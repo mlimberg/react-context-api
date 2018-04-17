@@ -135,3 +135,14 @@
 button:hover {
   cursor: pointer;
 }
+
+input {
+  min-width: 50px;
+  height: 25px;
+  margin-left: 8px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #61DAFB;
+  font-size: 16px;
+  color: gray;
+}
