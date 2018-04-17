@@ -26,6 +26,7 @@ class Card extends Component {
         { user => {
             return (
               <div className='card'>
+                <span className='delete-btn'>X</span>
                 <h3>{toggleItem()}</h3>
                 <p>{`Category: ${rating}`}</p>
               </div>  
