@@ -8,8 +8,9 @@ const Header = ({ signOut }) => {
 
   return (
     <UserContext.Consumer>
-      { user => {
-
+      { value => {
+        const { user } = value;
+        
         const toggleMessage = () => {
           if (user) {
             return `Welcome to React Context, ${user.username}`

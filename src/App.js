@@ -13,9 +13,10 @@ class App extends Component {
 
     this.deleteCard = id => {
       const favorites = this.state.user.favorites.filter(fav => fav.id !== id);
-      const newState = Object.assign({}, this.state, { user: { favorites }})
-      this.setState(newState);
+      const user = Object.assign({}, this.state.user, { favorites });
+      const newState = Object.assign({}, this.state, { user })
       
+      this.setState(newState);
     }
 
     this.state = {
@@ -63,8 +64,10 @@ class App extends Component {
     return (
       <div className="App">
         <UserContext.Provider value={this.state}>
+          
           <Header signOut={this.signOut} />
-          { user ? <Profile /> : <SignIn signIn={this.signIn} />}
+          
+          { user ? <Profile /> : <SignIn signIn={this.signIn} /> }
 
         </UserContext.Provider>
 

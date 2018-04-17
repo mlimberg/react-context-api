@@ -13,7 +13,6 @@ class Profile extends Component {
       <div className='profile-container'>
         <About />
         <Favorites />
-        <About />
       </div>
     )
   }
