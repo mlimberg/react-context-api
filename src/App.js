@@ -16,6 +16,7 @@ class App extends Component {
     }  
     
     this.signIn = this.signIn.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   signIn() {
@@ -43,6 +44,10 @@ class App extends Component {
     this.setState({ user })
   }
 
+  signOut() {
+    this.setState({ user: null })
+  }
+
 
   render() {
     const { user } = this.state;
@@ -50,7 +55,7 @@ class App extends Component {
     return (
       <div className="App">
         <UserContext.Provider value={user}>
-          <Header />
+          <Header signOut={this.signOut} />
           { user ? <Profile /> : <SignIn signIn={this.signIn} />}
 
         </UserContext.Provider>

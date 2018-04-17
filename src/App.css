@@ -132,6 +132,6 @@
   color: white;
 }
 
-.signin-container button:hover {
+button:hover {
   cursor: pointer;
 }
