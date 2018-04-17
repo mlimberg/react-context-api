@@ -1,0 +1,11 @@
+
+POST https://testhealthgrades.auth.us-east-1.amazoncognito.com/oauth2/token&
+Content-Type='application/x-www-form-urlencoded'
+
+grant_type=authorization_code&
+client_id=327fu9ed6blodcl61e9kq6pk64&
+code=0254650c-a1fa-4fad-a88a-85188f124c43&
+redirect_uri=https://testaws.healthgrades.com/account
+
+
+

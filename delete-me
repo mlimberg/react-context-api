@@ -1,0 +1,10 @@
+GET https://testhealthgrades.auth.us-east-1.amazoncognito.com/oauth2/authorize?
+response_type=code&
+client_id=327fu9ed6blodcl61e9kq6pk64&
+redirect_uri=https://testaws.healthgrades.com/account&
+state=FACEBOOK_LOGIN&
+scope=openid+email+profile+aws.cognito.signin.user.admin&
+identity_provider=Facebook
+
+
+
