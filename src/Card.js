@@ -24,7 +24,6 @@ class Card extends Component {
     return (    
       <UserContext.Consumer>
         { value => {
-            console.log('VALUE ', value)
             return (
               <div className='card'>
                 <span className='delete-btn' onClick={() => value.deleteCard(id)}>X</span>
