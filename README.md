@@ -78,7 +78,7 @@ Depending on how many components need access to the "global" data, you might imp
 ### Context vs. Redux
 Redux still serves a separate purpose. The new context does not include anything like reducers, actions, middleware, or dev tools. That said, if all you are using redux for is glorified prop-drilling, then you can likely replace with the context api
 
-Oh and...[...](https://redux.js.org/basics/usage-with-react#passing-the-store)
+[Oh and...](https://redux.js.org/basics/usage-with-react#passing-the-store)
 
 ---
 Quick Notes:
