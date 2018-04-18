@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import UserContext from './UserContext';
 import CardContainer from './CardContainer';
 import Profile from './Profile';
 import Header from './Header';
 import Footer from './Footer';
 import SignIn from './SignIn';
+import './App.css';
 
 class App extends Component {
   constructor() {

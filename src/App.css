@@ -122,19 +122,33 @@
 }
 
 .signin-container button {
-  margin: 20px auto;
-  width: 150px;
-  height: 40px;
-  font-size: 20px;
-  background-color: green;
-  border-radius: 5px;
+  margin: 10% auto;
+  width: 300px;
+  height: 300px;
+  font-size: 50px;
+  background-color: #61DAFB;
+  border-radius: 50%;
   box-shadow: 1px 1px 2px #000;
-  color: white;
+  color: black;
+  transition: all .1s ease-in-out;  
+}
+
+.signin-container button:hover {
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
+}
+
+.signin-container button:active {
+  transform: scale(.8);
+  transition: all .3s ease-in-out;
+  outline: none;
 }
 
 button:hover {
   cursor: pointer;
 }
+
+
 
 input {
   min-width: 50px;
