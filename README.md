@@ -70,9 +70,9 @@ import UserContext from '../filepath/UserConext'
 Depending on how many components need access to the "global" data, you might implement the Context API one of several ways...
 
 * Wrapping components with `<Provider>` and `<Consumer>` tags "manually"
-  * SEE **Provider-Consumer** branch
+  * checkout the **Provider-Consumer** branch
 * Create a HOC (Higher Order Component) and wrap each component that needs access to the data `WithContext(Component)`
-  * SEE **HOC** branch
+  * checkout the **HOC** branch
 
 
 ### Context vs. Redux
