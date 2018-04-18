@@ -80,7 +80,7 @@ Depending on how many components need access to the "global" data, you might imp
 
 Oh and...
 
-![redux docs](https://redux.js.org/basics/usage-with-react#passing-the-store)
+[redux docs](https://redux.js.org/basics/usage-with-react#passing-the-store)
 
 ---
 Quick Notes:
