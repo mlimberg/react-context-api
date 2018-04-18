@@ -14,35 +14,35 @@ const About = ({ ...props }) => {
       <div className='section-body'>
         <label>
           First Name
-          <input value={user.firstName}/>
+          <input readOnly value={user.firstName}/>
         </label>
         <label>
           Last Name
-          <input value={user.lastName}/>
+          <input readOnly value={user.lastName}/>
         </label>
         <label>
           Age
-          <input value={user.age}/>
+          <input readOnly value={user.age}/>
         </label>
         <label>
           Phone
-          <input value={user.phoneNumber}/>
+          <input readOnly value={user.phoneNumber}/>
         </label>
         <label>
           Street
-          <input value={user.street}/>
+          <input readOnly value={user.street}/>
         </label>
         <label>
           City
-          <input value={user.city}/>
+          <input readOnly value={user.city}/>
         </label>
         <label>
           State
-          <input value={user.state}/>
+          <input readOnly value={user.state}/>
         </label>
         <label>
           Zip
-          <input value={user.zip}/>
+          <input readOnly value={user.zip}/>
         </label>
       </div>
     </div>

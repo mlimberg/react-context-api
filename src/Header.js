@@ -2,13 +2,9 @@ import React from 'react';
 
 import logo from './logo.svg';
 import UserContext from './UserContext';
-import withUser from './UserContext';
+import WithUser from './UserContext';
 
-const Header = ({ user, ...props, updateSignIn }) => {
-  const { signOut } = props;
-
-  updateSignIn(true)
-  console.log('updateSignIn ', updateSignIn)
+const Header = ({ user, updateSignIn }) => {
 
   const toggleMessage = () => {
     if (user) {
@@ -21,7 +17,7 @@ const Header = ({ user, ...props, updateSignIn }) => {
   const toggleSignOut = () => {
     if (user) {
       return (
-        <button onClick={ signOut } >Sign Out</button>
+        <button onClick={ () => updateSignIn(false) } >Sign Out</button>
       )
     }
   }
@@ -37,4 +33,4 @@ const Header = ({ user, ...props, updateSignIn }) => {
   )
 }
 
-export default withUser(Header);
+export default WithUser(Header);

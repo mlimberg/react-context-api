@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import WithUser from './UserContext';
 
-const Card = ({...props}) => {
-  const { id, item, rating, user } = props;
+const Card = ({...props, user}) => {
+  const { id, item, rating, deleteCard } = props;
+  
   const toggleItem = () => {
     if (item === 'Swashbuckler') {
       return (
@@ -18,7 +19,7 @@ const Card = ({...props}) => {
 
   return (    
     <div className='card'>
-      <span className='delete-btn' onClick={() => user.deleteCard(id)}>X</span>
+      <span className='delete-btn' onClick={() => deleteCard(id)}>X</span>
       <h3>{toggleItem()}</h3>
       <p>{`Category: ${rating}`}</p>
     </div>  

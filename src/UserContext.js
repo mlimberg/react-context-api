@@ -1,6 +1,7 @@
 import React from 'react';
 
 let isSignedIn = false;
+let onUpdateCBs = [];
 
 const user = {
   username: 'steve@testing.com',
@@ -23,20 +24,58 @@ const user = {
   ]
 }
 
-const updateSignIn = val => {
-  isSignedIn = val;
-}
-
 const UserContext = React.createContext(user);
 
-const withUser = (Component) => {
-  return (props) => {
-    return (
-      <UserContext.Consumer>
-        { user => <Component {...props} user={ isSignedIn ? user : null } updateSignIn={updateSignIn} /> }
-      </UserContext.Consumer>
-    )
+export default (Component) => {
+  return class extends React.Component {
+    constructor() {
+      super()
+
+      this.updateSignIn = this.updateSignIn.bind(this)
+      this.deleteCard = this.deleteCard.bind(this)
+      this.update = this.update.bind(this)
+      this.runUpdates = this.runUpdates.bind(this)
+    }
+
+    update() {
+      this.forceUpdate()
+    }
+
+    componentDidMount() {
+      onUpdateCBs.push(this.update)
+    }
+
+    runUpdates() {
+      onUpdateCBs.forEach(fn => fn())      
+    }
+
+    updateSignIn(val) {
+      isSignedIn = val;
+      this.runUpdates();
+    }
+
+    deleteCard(id) {
+      const newFavorites = user.favorites.filter(fav => fav.id !== id);
+      user.favorites = newFavorites
+      this.runUpdates()
+    }
+
+    componentWillUnmount() {
+      onUpdateCBs = onUpdateCBs.filter(fn => fn !== this.update)
+    }
+
+    render() {
+      return (
+        <UserContext.Consumer>
+          { user => <Component 
+                      {...this.props} 
+                      user={ isSignedIn ? user : null } 
+                      updateSignIn={this.updateSignIn}
+                      deleteCard={this.deleteCard}
+                    /> 
+          }
+        </UserContext.Consumer>
+      )
+    }
   }
 }
-
-export default withUser;
