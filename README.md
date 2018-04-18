@@ -92,7 +92,7 @@ Quick Notes:
 * The defaultValue argument is used when you render a Consumer without a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
 
 Resources:
-* [THE DOCS] (https://reactjs.org/docs/context.html)
+* [THE DOCS](https://reactjs.org/docs/context.html)
 * [Kent C. Dodds Medium Article](https://medium.com/dailyjs/reacts-%EF%B8%8F-new-context-api-70c9fe01596b)
 * [A lot of googling](http://lmgtfy.com/?q=React+Context+API)
 
