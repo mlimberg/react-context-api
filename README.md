@@ -90,5 +90,6 @@ Quick Notes:
 Resources:
 * [THE DOCS](https://reactjs.org/docs/context.html)
 * [Kent C. Dodds Medium Article](https://medium.com/dailyjs/reacts-%EF%B8%8F-new-context-api-70c9fe01596b)
+* [How (and when) to use React’s new Context AP by Yomi](https://blog.logrocket.com/how-and-when-to-use-reacts-new-context-api-b584e41b2704)
 * [A lot of googling](http://lmgtfy.com/?q=React+Context+API)
 
