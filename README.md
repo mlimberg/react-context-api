@@ -15,8 +15,6 @@ Use cases could include:
 * theme
 * language
 
-![react component tree](https://78.media.tumblr.com/bcfb43ecedb69f2ee8c0cae2b758ab35/tumblr_inline_ofcxnvTThG1rgj0aw_500.png)
-
 ### Three Main Pieces:
 1. React.createContext
 2. Provider
@@ -67,16 +65,26 @@ import UserContext from '../filepath/UserConext'
 </UserContext.Consumer>
 ```
 
+### Multiple Approaches
+
+Depending on how many components need access to the "global" data, you might implement the Context API one of several ways...
+
+* Wrapping components with `<Provider>` and `<Consumer>` tags "manually"
+* Create a HOC (Higher Order Component) and wrap each component that needs access to the data `WithContext(Component)`
+
+
 ### Context vs. Redux
 * Context does not have dev tools currently
-* Redux USES context behind the scenes
 * The new context does not include anything like reducers, actions, or middleware
 * If all you are using redux for is glorified prop-drilling, then you can likely replace with the context api
 
+Oh and...
 
-Notes:
+![redux docs](https://redux.js.org/basics/usage-with-react#passing-the-store)
+
+---
+Quick Notes:
 * Don’t use context just to avoid passing props a few levels down. Stick to cases where the same data needs to be accessed in many components at multiple levels.
 * All consumers are re-rendered whenever the Provider value changes
-* Uses `Object.is()` to compare whether changes have occured in parent value
-* When React renders a context Consumer, it will read the current context value from the closest matching Provider above it in the tree.
+* When React renders a context Consumer, it will read the current context value from the *closest* matching Provider above it in the tree (see `onUpdateCBs` function in `UserContext.js`)
 * The defaultValue argument is used when you render a Consumer without a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
