@@ -70,7 +70,9 @@ import UserContext from '../filepath/UserConext'
 Depending on how many components need access to the "global" data, you might implement the Context API one of several ways...
 
 * Wrapping components with `<Provider>` and `<Consumer>` tags "manually"
+  * SEE **Provider-Consumer** branch
 * Create a HOC (Higher Order Component) and wrap each component that needs access to the data `WithContext(Component)`
+  * SEE **HOC** branch
 
 
 ### Context vs. Redux
@@ -86,5 +88,5 @@ Oh and...
 Quick Notes:
 * Don’t use context just to avoid passing props a few levels down. Stick to cases where the same data needs to be accessed in many components at multiple levels.
 * All consumers are re-rendered whenever the Provider value changes
-* When React renders a context Consumer, it will read the current context value from the *closest* matching Provider above it in the tree (see `onUpdateCBs` function in `UserContext.js`)
+* When React renders a context Consumer, it will read the current context value from the **closest** matching Provider above it in the tree (see `onUpdateCBs` function in `UserContext.js`)
 * The defaultValue argument is used when you render a Consumer without a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
