@@ -1,39 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import SubmitButton from './SubmitButton'
+import { useUpdateField } from './customHooks/index.js';
 
 import './SignIn.css'
 
-export default ({ signIn }) => {
-    const email = updateField('')
-    const password = updateField('')
-    const [error, setError] = useState(true)
+const About = ({ signIn, error }) => {
+    const email = useUpdateField('')
+    const password = useUpdateField('')
+    const [inputError, setInputError] = useState(true)
     const [submitted, setSubmitted] = useState(false)
 
-    function updateField(initVal) {
-        const [value, setVal] = useState(initVal)
-        const handleChange = e => setVal(e.target.value)
-
-        return { value, onChange: handleChange }
-    }
-
-    function attemptSignIn() {        
+    function attemptSignIn(e) {
+        e.preventDefault()
         setSubmitted(true)
 
         if(!email.value || !password.value) {
-            return setError(true)
+            return setInputError(true)
         }
         
-        signIn()
+        signIn(email.value, password.value)
     }
 
     function handleClass(val) {
-        const hasError = error && submitted && !val
-        const setError = hasError ? 'error' : ''
+        const hasError = inputError && submitted && !val
+        const setError = hasError ? 'input-error' : ''
 
         return `inputClass ${setError}`
     }
 
     return (
-        <div className='signin-container'>
+        <form 
+            className='signin-container'
+            onSubmit={attemptSignIn}
+        >
+            {error && <div className='banner-error'>{error}</div>}
             <input
                 className={handleClass(email.value)}
                 {...email}
@@ -43,7 +44,11 @@ export default ({ signIn }) => {
                 {...password}
                 type='password'
             />
-            <button onClick={attemptSignIn}>Sign In</button>
-        </div>
+            <SubmitButton
+                text='Sign In'
+            />
+        </form>
     )
 }
+
+export default About;

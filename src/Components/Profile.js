@@ -3,19 +3,11 @@ import About from './About';
 import Favorites from './Favorites';
 import './App.css';
 
-class Profile extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div className='profile-container'>
-        <About />
+const Profile = ({ saveUpdates }) => (
+    <div className='profile-container'>
+        <About saveUpdates={saveUpdates} />
         <Favorites />
-      </div>
-    )
-  }
-}
+    </div>
+)
 
 export default Profile;

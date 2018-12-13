@@ -1,0 +1,55 @@
+.add-fave-btn, .add-fave-form {
+    margin-bottom: 20px;
+}
+
+.add-btn {
+    width: 40px;
+}
+
+.add-fave-btn {
+    width: 300px;
+}
+
+.add-fave-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 40px;
+}
+
+.add-fave-form input {
+    font-size: 16px;
+    outline: none;
+    margin-left: 2px;
+    padding: 5px;
+    height: 30px;
+    border: 1px solid #61DAFB;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin: 0 auto 20px;
+    width: 100%;
+}
+
+.hide-form {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 5px;
+  color: #3647a2;
+  right: -8px;
+  top: 8px;
+}
+
+.hide-form:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.input-error {
+    border: 2px solid red !important; 
+}

@@ -1,68 +1,135 @@
-import React, { Component, useState } from 'react';
-import './Components/App.css';
-import UserContext from './Context/UserContext';
-import Profile from './Components/Profile';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import SignIn from './Components/SignIn';
+import React, { useState, useEffect, useReducer } from 'react';
 
-class App extends Component {
-  constructor() {
-    super();
+import UserContext from './context/UserContext';
+import LoadingContext from './context/LoadingContext';
+import FavoritesDispatch from './context/FavoritesDispatch';
+import Profile from './components/Profile';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SignIn from './components/SignIn';
+import userData from './data/userData';
 
-    this.state = {
-      user: null
-    }  
-    
-    this.signIn = this.signIn.bind(this);
-    this.signOut = this.signOut.bind(this);
-  }
+import './components/App.css';
 
-  signIn() {
-    const user = {
-      username: 'steve@testing.com',
-      firstName: 'Davy',
-      lastName: 'Jones',
-      age: 292,
-      phoneNumber: '555-555-5555',
-      street: '10000 leagues',
-      city: 'Under The Sea',
-      state: 'FL',
-      zip: 12345,
-      favorites: [
-        { id: 1, item: 'Pirates of the Caribbean', rating: 'PG-13' },
-        { id: 2, item: 'Hook', rating: 'PG' },
-        { id: 3, item: 'The Goonies', rating: 'PG' },
-        { id: 5, item: 'Swashbuckler', rating: 'PG' },
-        { id: 6, item: 'Peter Pan', rating: 'G' },
-        { id: 7, item: 'The Princess Bride', rating: 'PG' },
-        { id: 8, item: 'Captain Phillips', rating: 'PG-13' },
-      ]
+export default function App() {
+    // const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [user, dispatch] = useReducer(userReducer, null)
+    let existing = null;
+
+    function userReducer(state, action) {
+        switch (action.type) {
+            case 'SET_USER':
+                return action.user;
+            case 'ADD_FAVE':
+                const addFave = [...state.favorites, action.item]
+                return { ...state , favorites: addFave }
+            case 'REMOVE_FAVE':
+                const removeFave = state.favorites.filter(fave => fave.id !== action.id)
+                return { ...state, favorites: removeFave }
+            default:
+                return state;
+        }
     }
 
-    this.setState({ user })
-  }
+    useEffect(() => {
 
-  signOut() {
-    this.setState({ user: null })
-  }
+        if (!user) {
+            checkForSavedUser()
+        }
 
+        if (user) updateStorage(user)
+    }, [user, existing]) // this tells the effect not to run if a prop in the array is the same between re-renders. otherwise you get an infinite loop as setUser will re-render, then run the effect again infinitely
 
-  render() {
-    const { user } = this.state;
+    function updateStorage(user) {
+        localStorage.setItem(user.username, JSON.stringify(user))
+    }
+
+    function checkForSavedUser() {
+        const key = JSON.parse(localStorage.getItem('fakeUser'))
+        const userFound = key ? userData[key] : null
+    
+        if (userFound) {
+            existing = localStorage.getItem(userFound.username)
+        }
+    
+        if (existing) {
+            // setUser(JSON.parse(existing))
+            dispatch({ type: 'SET_USER', user: JSON.parse(existing) });
+        } else {
+           // setUser(user)
+           dispatch({ type: 'SET_USER', user: userFound })
+       }
+    }
+
+    function signIn(username, key) {
+        setLoading(true)
+        const user = userData[key]
+        existing = localStorage.getItem(user.username)
+
+        setTimeout(() => {
+            setLoading(false)
+
+            if (existing) {
+                // setUser(existing)
+                dispatch({ type: 'SET_USER', user: existing })
+            } else if (user) {
+                localStorage.setItem('fakeUser', JSON.stringify(key))
+                localStorage.setItem(user.username, JSON.stringify(user))
+                // setUser(user)
+                dispatch({ type: 'SET_USER', user })
+                setError(null)
+            } else {
+                setError('User not found')
+            }
+
+        }, 2000)
+    }
+
+    function signOut() {
+        localStorage.removeItem('fakeUser')
+        localStorage.removeItem(user.username)
+        // setUser(null)
+        dispatch({ type: 'SET_USER', user: null })
+    }
+
+    function saveUpdates(updates) {
+        const newUser = { ...user, ...updates }
+        setLoading(true)
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                localStorage.setItem(newUser.username, JSON.stringify(newUser))
+                setLoading(false)
+                // setUser(newUser)
+                dispatch({ type: 'SET_USER', user: newUser });
+
+                resolve(true)
+            }, 1000)
+        })
+    }
 
     return (
-      <div className="App">
-        <UserContext.Provider value={user}>
-          <Header signOut={this.signOut} />
-          {user ? <Profile /> : <SignIn signIn={this.signIn} />}
-
-        </UserContext.Provider>
-
-        <Footer />
-      </div>
+        <div className="App">
+            <UserContext.Provider value={user}>
+                <LoadingContext.Provider value={loading}>
+                    <FavoritesDispatch.Provider value={dispatch}>
+                        <Header signOut={signOut} />
+                        {user ? 
+                            <Profile 
+                                saveUpdates={saveUpdates}
+                            /> 
+                        :
+                            <SignIn 
+                                signIn={signIn}
+                                error={error}
+                            />
+                        }
+                        <Footer />
+                    </ FavoritesDispatch.Provider>
+                </ LoadingContext.Provider>
+            </ UserContext.Provider>
+        </div>
     );
-  }
 }
-
-export default App;

@@ -1,40 +1,28 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
+
+import FavoritesDispatch from '../context/FavoritesDispatch';
+
 import './App.css';
-import UserContext from '../Context/UserContext';
 
-class Card extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    const { id, item, rating } = this.props;
-    const toggleItem = () => {
-      if (item === 'Swashbuckler') {
-        return (
-          <a href="http://www.imdb.com/title/tt0075294/" target="_blank">
-            {item}
-          </a>
-        )
-      } else {
-        return item
-      }
+const Card = ({ id, item, rating }) => {
+    const dispatch = useContext(FavoritesDispatch);
+    
+    function removeItem() {
+        dispatch({ type: 'REMOVE_FAVE', id })
     }
 
     return (    
-      <UserContext.Consumer>
-        { user => {
-            return (
-              <div className='card'>
-                <span className='delete-btn'>X</span>
-                <h3>{toggleItem()}</h3>
-                <p>{`Category: ${rating}`}</p>
-              </div>  
-            )
-        }}
-      </UserContext.Consumer>
+        <div className='card'>
+            <div
+                className='delete-btn'
+                onClick={removeItem}
+            >
+                &#x2715;
+            </div>
+            <h3>{item}</h3>
+            <p>{`Rating: ${rating}`}</p>
+        </div>  
     )
-  }
 }
 
 export default Card;

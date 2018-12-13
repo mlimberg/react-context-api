@@ -1,27 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
-import UserContext from '../Context/UserContext';
+import UserContext from '../context/UserContext';
+
+import './Header.css';
 
 const Header = ({ signOut }) => {
-  
-
 
   return (
     <UserContext.Consumer>
       { user => {
 
         const toggleMessage = () => {
-          if (user) {
-            return `Welcome to React Context, ${user.username}`
-          } else {
-            return "Welcome! Please sign in"
-          }
+            let msg = 'Welcome! Please sign in'
+            
+            if (user) msg = `Welcome to React Context, ${user.username}!`
+
+            return msg;
         }
 
         const toggleSignOut = () => {
           if (user) {
             return (
-              <button onClick={ signOut } >Sign Out</button>
+              <a
+                onClick={signOut}
+                className='sign-out-btn'
+            >
+                Sign Out
+            </a>
             )
           }
         }
