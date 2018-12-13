@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import UserContext from './UserContext';
+import UserContext from '../Context/UserContext';
 
 const Header = ({ signOut }) => {
   

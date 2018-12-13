@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserContext from './UserContext';
+import UserContext from '../Context/UserContext';
 
 class Card extends Component {
   constructor() {

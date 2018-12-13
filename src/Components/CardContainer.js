@@ -6,7 +6,7 @@ export default class CardContainer extends Component {
   render() {
     const renderCards = () => {
       return this.props.cards.map((card, i) => {
-        return <Card {...card} key={i}/>
+        return <Card {...card} key={i + Date.now()}/>
       })
     }
 

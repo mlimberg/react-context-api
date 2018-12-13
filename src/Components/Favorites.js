@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import UserContext from './UserContext';
+import UserContext from '../Context/UserContext';
 import Card from './Card';
 
 const Favorites = () => {

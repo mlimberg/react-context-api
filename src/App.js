@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import UserContext from './UserContext';
-import CardContainer from './CardContainer';
-import Profile from './Profile';
-import Header from './Header';
-import Footer from './Footer';
-import SignIn from './SignIn';
+import React, { Component, useState } from 'react';
+import './Components/App.css';
+import UserContext from './Context/UserContext';
+import Profile from './Components/Profile';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import SignIn from './Components/SignIn';
 
 class App extends Component {
   constructor() {
@@ -35,9 +34,9 @@ class App extends Component {
         { id: 2, item: 'Hook', rating: 'PG' },
         { id: 3, item: 'The Goonies', rating: 'PG' },
         { id: 5, item: 'Swashbuckler', rating: 'PG' },
-        { id: 5, item: 'Peter Pan', rating: 'G' },
-        { id: 5, item: 'The Princess Bride', rating: 'PG' },
-        { id: 5, item: 'Captain Phillips', rating: 'PG-13' },
+        { id: 6, item: 'Peter Pan', rating: 'G' },
+        { id: 7, item: 'The Princess Bride', rating: 'PG' },
+        { id: 8, item: 'Captain Phillips', rating: 'PG-13' },
       ]
     }
 
@@ -56,7 +55,7 @@ class App extends Component {
       <div className="App">
         <UserContext.Provider value={user}>
           <Header signOut={this.signOut} />
-          { user ? <Profile /> : <SignIn signIn={this.signIn} />}
+          {user ? <Profile /> : <SignIn signIn={this.signIn} />}
 
         </UserContext.Provider>
 

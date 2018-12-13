@@ -1,0 +1,37 @@
+.signin-container {
+    width: 50%;
+    margin: 32px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputClass, .error {
+    width: 300px;
+    height: 45px;
+    border: 1px solid #61DAFB;
+    box-shadow: 1px 1px 1px #ccc;
+    font-size: 20px;
+    padding: 2px 5px;
+    outline: none;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+.signin-container button {
+    margin: 20px auto;
+    width: 300px;
+    height: 45px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: #61DAFB;
+    color: black;
+    outline: none;
+}
+
+.error {
+    border: 2px solid red; 
+}
